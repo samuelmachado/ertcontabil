@@ -56,6 +56,9 @@
                 var m =  formattedDate.getMonth();
                 m += 1;
                 var y = formattedDate.getFullYear();
+                if(value.arq_description == null){
+                    value.arq_description = '';
+                }
                 content += '<tr><td>'+d+'/'+m+'/'+y+'</td><td>'+value.arq_name+'</td><td><textarea class="form-control" onchange="changeTitle('+value.arq_id+',this.value)">'+value.arq_description+'</textarea></td><td><a target="_blank" href="<?php print base_url('pastas/forceDownloadArquivo/');?>'+value.arq_hash+'"><i class="fa fa-download fa-2x"></i></a></td>';
 
                 <?php if($this->session->auth == 'admin'){ ?>

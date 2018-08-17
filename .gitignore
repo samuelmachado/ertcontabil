@@ -1,4 +1,16 @@
 .DS_Store
+application/cache/*
+!application/cache/index.html
+/_pdf/*
+_pdf/*
+_pdf/
+application/logs/*
+!application/logs/index.html
+
+.htaccess
+!application/*/.htaccess
+/application/config/database.php
+/application/config/config.php
 
 /assets/u/*
 application/cache/*

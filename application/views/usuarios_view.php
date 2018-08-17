@@ -80,6 +80,7 @@
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
+
                               <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="field-3" class="control-label" >Senha</label>
@@ -94,7 +95,14 @@
                                         <span class="help-block"></span>
                                     </div>
                                 </div> -->
-                            </div>                        
+                            </div>  
+                            <div class="row">
+                                <div class="col-md-12">
+                                <br>
+                                    <i>Aviso: Notifique usuários que utilizam @hotmail.com que o e-mail pode chegar na caixa de SPAM</i>
+                                <br>
+                                </div>
+                            </div>                      
                     </form>
                 </div>
                 <div class="modal-footer">

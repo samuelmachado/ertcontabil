@@ -1,0 +1,98 @@
+.bg-accpunt-pages,.bg-accpunt-pages {
+	background: linear-gradient(to left, #4489e4, #5691c8) !important;
+}
+
+.button-manzoni { 
+  color: #FFFFFF; 
+  background-color: #3d4d86; 
+  border-color: #FFFFFF; 
+} 
+ 
+.button-manzoni:hover, 
+.button-manzoni:focus, 
+.button-manzoni:active, 
+.button-manzoni.active, 
+.open .dropdown-toggle.button-manzoni { 
+  color: #FFFFFF; 
+  background-color: #3d4d86; 
+  border-color: #FFFFFF; 
+} 
+ 
+.button-manzoni:active, 
+.button-manzoni.active, 
+.open .dropdown-toggle.button-manzoni { 
+  background-image: none; 
+} 
+ 
+.button-manzoni.disabled, 
+.button-manzoni[disabled], 
+fieldset[disabled] .button-manzoni, 
+.button-manzoni.disabled:hover, 
+.button-manzoni[disabled]:hover, 
+fieldset[disabled] .button-manzoni:hover, 
+.button-manzoni.disabled:focus, 
+.button-manzoni[disabled]:focus, 
+fieldset[disabled] .button-manzoni:focus, 
+.button-manzoni.disabled:active, 
+.button-manzoni[disabled]:active, 
+fieldset[disabled] .button-manzoni:active, 
+.button-manzoni.disabled.active, 
+.button-manzoni[disabled].active, 
+fieldset[disabled] .button-manzoni.active { 
+  background-color: #E4C81F; 
+  border-color: #FFFFFF; 
+} 
+ 
+.button-manzoni .badge { 
+  color: #E4C81F; 
+  background-color: #FFFFFF; 
+}
+
+
+
+
+.button-manzoni2 { 
+  color: #FFFFFF; 
+  background-color: #EED95F; 
+  border-color: #FFFFFF; 
+} 
+ 
+.button-manzoni2:hover, 
+.button-manzoni2:focus, 
+.button-manzoni2:active, 
+.button-manzoni2.active, 
+.open .dropdown-toggle.button-manzoni2 { 
+  color: #FFFFFF; 
+  background-color: #EFE18E; 
+  border-color: #FFFFFF; 
+} 
+ 
+.button-manzoni2:active, 
+.button-manzoni2.active, 
+.open .dropdown-toggle.button-manzoni2 { 
+  background-image: none; 
+} 
+ 
+.button-manzoni2.disabled, 
+.button-manzoni2[disabled], 
+fieldset[disabled] .button-manzoni2, 
+.button-manzoni2.disabled:hover, 
+.button-manzoni2[disabled]:hover, 
+fieldset[disabled] .button-manzoni2:hover, 
+.button-manzoni2.disabled:focus, 
+.button-manzoni2[disabled]:focus, 
+fieldset[disabled] .button-manzoni2:focus, 
+.button-manzoni2.disabled:active, 
+.button-manzoni2[disabled]:active, 
+fieldset[disabled] .button-manzoni2:active, 
+.button-manzoni2.disabled.active, 
+.button-manzoni2[disabled].active, 
+fieldset[disabled] .button-manzoni2.active { 
+  background-color: #EED95F; 
+  border-color: #FFFFFF; 
+} 
+ 
+.button-manzoni2 .badge { 
+  color: #EED95F; 
+  background-color: #FFFFFF; 
+}

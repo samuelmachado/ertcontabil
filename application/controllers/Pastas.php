@@ -12,7 +12,7 @@ class Pastas extends CI_Controller {
         if(ENVIRONMENT == 'development'){
             $this->serverPath = $_SERVER['DOCUMENT_ROOT'].'/ertcontabil/';
         } else {
-            $this->serverPath = $_SERVER['DOCUMENT_ROOT'];
+            $this->serverPath = $_SERVER['DOCUMENT_ROOT'].'/';
         }
         $this->load->library('Transform');
         $this->transform =  new Transform();

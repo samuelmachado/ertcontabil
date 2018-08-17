@@ -83,17 +83,19 @@
             <div class="col-lg-12">
                 <a class="btn btn-casier casier" href="<?php print site_url( 'pastas/projeto/'.md5($projeto->prj_id) ); ?>"><i class="glyphicon glyphicon-chevron-left"></i> Voltar</a>
                 
+                <br><h2><?php print $projeto->fol_name ?></h2><br>
 
                 <?php if($this->session->auth == 'admin'){ ?>
 
-                <h2>Adicionar Arquivos</h2>
+                <h3>Adicionar Arquivos</h3>
                 <form onclick="update();" style="background: papayawhip" id="my-awesome-dropzone" action="<?php print site_url( 'pastas/fileUpload/'.$this->uri->segment(3).'/'.$projeto->fol_id); ?>" method="POST" class="dropzone">
                     <div class="fallback">
                         <input name="file" type="file" multiple />
                     </div>
                 </form>
                 <?php } ?>
-                <h2>Arquivos Adicionados <a onclick="atualizar()" class="btn btn-danger"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar Arquivos</a> </h2>
+                <br>
+                <h3>Arquivos Adicionados <a onclick="atualizar()" class="btn btn-danger"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar Arquivos</a> </h3>
                 
                 <div class="table-responsive" >
                     <table  id="table" class="table table-striped table-bordered table-hover sortable table-responsive">

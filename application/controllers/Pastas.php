@@ -38,7 +38,6 @@ class Pastas extends CI_Controller {
             'projeto' => $this->table->getHash($fol_hash),
             'fol_hash' => $fol_hash
         ];
-
         $this->load->view('template/top_logged');
         $this->load->view('arquivos', $dados);
         $this->load->view('template/footer_logged');

@@ -31,4 +31,24 @@ class Arquivos_model extends CI_Model {
     public function titleUpdate($arq_id, $desc){
         $this->db->where('arq_id', $arq_id)->update($this->table, ['arq_description' => $desc]);
     }
+
+    public function storeLog($data){
+        $this->db->insert('arquivos_logs',$data);
+    }
+    public function getAgent(){
+        $this->load->library('user_agent');
+
+        if ($this->agent->is_browser()) {
+            $agent = $this->agent->browser() . ' ' . $this->agent->version();
+        } elseif ($this->agent->is_robot()) {
+            $agent = $this->agent->robot();
+        } elseif ($this->agent->is_mobile()) {
+            $agent = $this->agent->mobile();
+        } else {
+            $agent = 'Unidentified User Agent';
+        }
+
+        return $this->agent->platform() . '/' . $agent;
+    }
+
 }

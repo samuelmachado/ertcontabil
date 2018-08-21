@@ -8,6 +8,7 @@ class Login extends CI_Controller {
         parent::__construct();
         $this->load->model('login_model','login');
         date_default_timezone_set('America/Sao_Paulo');
+        $this->load->model('arquivos_model', 'arquivos');
 
     }
     
@@ -25,12 +26,14 @@ class Login extends CI_Controller {
         $response = $this->login->checkAuth( $this->input->post(NULL, TRUE) );
         if($response){
             $this->setSessionUser($response);
+            $this->generateLogUser('ACESSO', 'Entrou no sistema');
             if($response->usr_auth == 'admin'){
                 return print json_encode(['status' => 'success', 'redirect' => site_url('projetos')]);
             } else {
                 $link = 'pastas/projeto/'.md5($response->prj_id);
                 return print json_encode(['status' => 'success', 'redirect' => site_url($link)]);
             }
+
         } else {
             return print json_encode(['status' => 'erro']);
         }
@@ -50,5 +53,17 @@ class Login extends CI_Controller {
         $response = $this->usuarios->get_by_id($this->session->usr_id);
         $link = 'pastas/projeto/'.md5($response->prj_id);
         redirect($link);
+    }
+
+       private function generateLogUser($action, $logUpdate)
+    {
+        $this->arquivos->storeLog([
+            'usr_id' => $this->session->usr_id,
+            'cnl_action' => $action,
+            'cnl_agent' => $this->arquivos->getAgent(),
+            'cnl_ip' => $_SERVER['REMOTE_ADDR'],
+            'cnl_info' => $logUpdate,
+            'cnl_registered' => date('Y-m-d H:i:s'),
+            ]);
     }
 }

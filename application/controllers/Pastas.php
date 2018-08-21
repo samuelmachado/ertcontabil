@@ -17,6 +17,9 @@ class Pastas extends CI_Controller {
         $this->load->library('Transform');
         $this->transform =  new Transform();
         $this->load->model('arquivos_model', 'arquivos');
+        $this->load->model('pastas_model', 'pastas');
+        $this->load->model('Projetos_model','projetos');
+
 
     }
 
@@ -32,7 +35,6 @@ class Pastas extends CI_Controller {
 
      public function arquivos($fol_hash)
     {   
-        $this->load->model('Projetos_model','projetos');
 
         $dados = [
             'projeto' => $this->table->getHash($fol_hash),
@@ -87,6 +89,10 @@ class Pastas extends CI_Controller {
 
     public function deleteArquivo($arq_hash){
         $arquivo = $this->arquivos->getFile($arq_hash);
+        $pasta = $this->pastas->get_by_id($arquivo->fol_id);
+        $projeto = $this->projetos->get_by_id($pasta->prj_id);
+        $this->generateLogUser('REMOÇÃO', 'Removeu o arquivo '.$arquivo->arq_name.' na pasta '.$pasta->fol_name.' da empresa '.$projeto->prj_name);
+
         $this->arquivos->deleteFile($arq_hash);
         redirect('pastas/arquivos/'.$arquivo->fol_hash);
     }
@@ -135,6 +141,11 @@ class Pastas extends CI_Controller {
                 'arq_hash' => md5($fol_hash.$fol_id.date('Y-m-d H:i:s'))
             ];
             $this->arquivos->storeFile($dados);
+
+            $pasta = $this->pastas->get_by_id($fol_id);
+                    $projeto = $this->projetos->get_by_id($pasta->prj_id);
+            $this->generateLogUser('UPLOAD', 'Subiu o arquivo '.$newfilename.' na pasta '.$pasta->fol_name.' da empresa '.$projeto->prj_name);
+
         }
     }
     
@@ -145,6 +156,11 @@ class Pastas extends CI_Controller {
         $arquivo = $this->arquivos->getFile($arq_hash);
         $path = $this->serverPath.'assets/u/'.$arquivo->fol_hash.'/'.$arquivo->arq_name;
         $name = $arquivo->arq_name;
+        $folder = $this->pastas->getHash($arquivo->fol_hash);
+        $projeto = $this->projetos->get_by_id($folder->prj_id);
+
+        $this->generateLogUser('DOWNLOAD', 'Baixou o arquivo '.$name.' na pasta '.$folder->fol_name.' da empresa '.$projeto->prj_name);
+
         if(is_file($path)) {
             if (ini_get('zlib.output_compression')) {
                 ini_set('zlib.output_compression', 'Off');
@@ -203,6 +219,9 @@ class Pastas extends CI_Controller {
         $data['fol_hash'] = sha1(date('Y-m-d H:i:s').rand(1,100).rand(1,10));
         $insert = $this->table->save($data);
 
+        $projeto = $this->projetos->get_by_id($data['prj_id']);
+        $this->generateLogUser('CRIAÇÃO', 'Criou a pasta '.$data['fol_name'].' na empresa '.$projeto->prj_name);
+
 
      
         echo json_encode(array("status" => TRUE));
@@ -214,7 +233,7 @@ class Pastas extends CI_Controller {
     {
         $data = $this->table->get_by_id($id);
         echo json_encode(['data' => $data, 'fields' => $this->table->getColumns()]);
-
+       
     }
 
      public function ajax_update()
@@ -223,12 +242,16 @@ class Pastas extends CI_Controller {
         $this->_validate();
         $data = $this->input->post(NULL, TRUE);
         $this->table->update(array('fol_id' => $this->input->post('fol_id')), $data);
-        
+         $projeto = $this->projetos->get_by_id($data['prj_id']);
+        $this->generateLogUser('EDIÇÃO', 'Alterou o nome da pasta '.$data['fol_name'].' na empresa '.$projeto->prj_name);
         echo json_encode(array("status" => TRUE));
     }
 
        public function ajax_delete($id)
     {
+        $pasta = $this->pastas->get_by_id($id);
+        $projeto = $this->projetos->get_by_id($pasta->prj_id);
+        $this->generateLogUser('REMOÇÃO', 'Removeu a pasta '.$pasta->fol_name.' na empresa '.$projeto->prj_name);
         $this->table->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
     }
@@ -239,5 +262,18 @@ class Pastas extends CI_Controller {
     $this->output
         ->set_content_type('application/json')
         ->set_output(json_encode($out));
+    }
+
+
+    private function generateLogUser($action, $logUpdate)
+    {
+        $this->arquivos->storeLog([
+            'usr_id' => $this->session->usr_id,
+            'cnl_action' => $action,
+            'cnl_agent' => $this->arquivos->getAgent(),
+            'cnl_ip' => $_SERVER['REMOTE_ADDR'],
+            'cnl_info' => $logUpdate,
+            'cnl_registered' => date('Y-m-d H:i:s'),
+            ]);
     }
 }

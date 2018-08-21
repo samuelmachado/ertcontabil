@@ -81,6 +81,7 @@
                         <li class="menu-title" style="color: #fff">Menu</li>
                         <?php if($this->session->auth == 'admin'){ ?>
                             <li style="color: #fff"><a style="color: #fff" href="<?php print site_url('projetos') ?>"><i class="fa fa-group fa-2x"></i> <span>Empresas</span> </a></li>
+                            <li style="color: #fff"><a style="color: #fff" href="<?php print site_url('historico') ?>"><i class="fa fa-history fa-2x"></i> <span>Históricos</span> </a></li>
                         <?php } else {  ?>
                             <li style="color: #fff"><a style="color: #fff" href="<?php print site_url('login/principal') ?>"><i class="fa fa-folder fa-2x"></i> <span>Pasta Principal</span> </a></li>
                         <?php  } ?>
